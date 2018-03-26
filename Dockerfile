@@ -2,9 +2,9 @@ FROM jenkins/jenkins:lts-alpine
 
 USER root
 RUN apk update && apk upgrade && \
-    apk add \
-      docker \
-      vim
+    apk --no-cache add docker sudo vim \
+        python python-dev py-pip build-base libffi-dev openssl-dev && \
+    pip install pipenv
 
 USER jenkins
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
@@ -16,5 +16,3 @@ COPY configure-jnlp-agent-protocols.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-
-USER root
