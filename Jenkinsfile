@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build image') {
             steps {
-                sh "docker build . -t fongshway/jenkins"
+                sh "docker build . -t fongshway/jenkins:${BRANCH_NAME}"
             }
         }
         stage('Test image') {
@@ -17,7 +17,7 @@ pipeline {
         stage('Push image') {
             steps {
                 withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://registry.hub.docker.com/fongshway/jenkins']) {
-                  sh "docker push fongshway/jenkins"
+                  sh "docker push fongshway/jenkins:${BRANCH_NAME}"
                 }
             }
         }
