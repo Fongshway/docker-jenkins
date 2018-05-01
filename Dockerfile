@@ -2,9 +2,7 @@ FROM jenkins/jenkins:lts-alpine
 
 USER root
 RUN apk update && apk upgrade && \
-    apk --no-cache add docker sudo vim \
-        python python-dev py-pip build-base libffi-dev openssl-dev && \
-    pip install pipenv
+    apk --no-cache add docker sudo vim
 
 USER jenkins
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
