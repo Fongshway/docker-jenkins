@@ -2,7 +2,9 @@ FROM jenkins/jenkins:lts-alpine
 
 USER root
 RUN apk update && apk upgrade && \
-    apk --no-cache add docker sudo vim
+    apk --no-cache add docker sudo vim py-pip && \
+    pip install --upgrade pip && \
+    pip install docker-compose
 
 USER jenkins
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
