@@ -14,4 +14,6 @@ COPY init.groovy.d /usr/share/jenkins/ref/init.groovy.d
 COPY jobs /usr/share/jenkins/ref/jobs
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 
+WORKDIR /var/jenkins_home
+
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
